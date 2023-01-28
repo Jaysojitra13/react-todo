@@ -24,6 +24,10 @@ function TodoList() {
     setTodos(updatedTodos);
   };
 
+  const updateReorderedTodos = newTodos => {
+    setTodos(newTodos);
+  }
+
   const updateTodo = (todoId, newValue) => {
     if (!newValue.text || newValue.text.trim() === '') {
       return
@@ -46,6 +50,7 @@ function TodoList() {
         completeTodo = {completeTodo}
         removeTodo = {removeTodo}
         updateTodo = {updateTodo}
+        updateReorderedTodos={updateReorderedTodos}
         />
     </div>
   )
