@@ -3,6 +3,7 @@ import {RiCloseCircleLine} from 'react-icons/ri'
 import { TiEdit } from 'react-icons/ti';
 import TodoForm from './TodoForm';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { store } from '../store/store';
 
 function Todo({ todos, completeTodo, removeTodo, updateTodo, updateReorderedTodos }) {
 
@@ -12,7 +13,6 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo, updateReorderedTodo
   });
 
   const submitEdit = value => {
-    updateTodo(edit.id, value);
     setEdit({
       id: null,
       text: ''
@@ -20,7 +20,7 @@ function Todo({ todos, completeTodo, removeTodo, updateTodo, updateReorderedTodo
   };
 
   if (edit.id) {
-    return <TodoForm edit={edit} onSubmit={submitEdit}/>
+    return <TodoForm edit={edit} onEdit={submitEdit}/>
   }
 
   const reorder = (list, startIndex, endIndex) => {
