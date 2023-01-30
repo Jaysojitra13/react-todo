@@ -35,13 +35,22 @@ const rootReducer = (state = initialState, action) => {
         todos: action.value
       }
     case 'complete_todo':
-      const completedTodos = state.todos.map(todo => {
+      let completedTodos = state.todos.map(todo => {
         if (todo.id === action.value) {
           todo.isComplete = !todo.isComplete
         };
         return todo;
       });
 
+      const foundCompletedTodoIndex = state.todos.findIndex(todo => todo.id === action.value && todo.isComplete);
+
+      let newCompletedTodos = [];
+      if (foundCompletedTodoIndex !== -1) {
+        newCompletedTodos.push(completedTodos[foundCompletedTodoIndex]);
+        completedTodos.splice(newCompletedTodos, 1);
+      }
+      completedTodos = [...completedTodos, ...newCompletedTodos];
+      
       return {
         ...state,
         todos: completedTodos
